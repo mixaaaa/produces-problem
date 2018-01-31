@@ -1,6 +1,7 @@
 package com.showcase.spring.producesproblem.test.controller;
 
-import com.showcase.spring.producesproblem.resource.InputResource;
+import java.util.Collections;
+
 import org.assertj.core.api.Assertions;
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -12,7 +13,7 @@ import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.*;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.util.Collections;
+import com.showcase.spring.producesproblem.resource.InputResource;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
@@ -31,7 +32,7 @@ public class InputControllerTest {
 	@Test
 	public void testErrorPlain() throws Exception {
 		// FAILURE?? Should not be null
-		initShowcaseTest(false, true);
+		initShowcaseTest(false, false);
 	}
 
 	@Test
@@ -55,8 +56,8 @@ public class InputControllerTest {
 		}
 		headers.setContentType(MediaType.APPLICATION_JSON);
 
-		ResponseEntity<String> response = testRestTemplate.exchange(
-				"/showcase", HttpMethod.POST, new HttpEntity<>(input, headers), String.class);
+		ResponseEntity<String> response = testRestTemplate.exchange("/showcase", HttpMethod.POST,
+				new HttpEntity<>(input, headers), String.class);
 
 		logger.info("INPUT_CONTROLLER_TEST | response={}", response);
 
